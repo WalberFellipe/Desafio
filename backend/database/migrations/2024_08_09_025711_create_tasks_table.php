@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->timestamps();
-            $table->boolean('is_active')->default(true);
+            $table->uuid('status');
+            $table->foreign('status')->references('id')->on('tasks_statuses');
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tasks');
     }
 };

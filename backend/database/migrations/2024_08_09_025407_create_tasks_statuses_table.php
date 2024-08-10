@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tasks_statuses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('key')->unique();
+            $table->string('description');
             $table->timestamps();
-            $table->boolean('is_active')->default(true);
         });
-    }
+    }    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tasks_statuses');
     }
 };
