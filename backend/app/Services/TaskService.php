@@ -3,13 +3,11 @@
 namespace App\Services;
 
 use App\Models\Task;
-use Illuminate\Support\Str;
 
 class TaskService
 {
     public function createTask(array $data): Task
     {
-        $data['id'] = Str::uuid();
         return Task::create($data);
     }
 

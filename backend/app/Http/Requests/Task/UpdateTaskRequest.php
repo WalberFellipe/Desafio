@@ -16,7 +16,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'nullable|uuid|exists:tasks_statuses,id',
+            'status' => 'required|integer|exists:tasks_statuses,id',
         ];
     }
 }

@@ -16,7 +16,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'required|uuid|exists:tasks_statuses,id',
+            'status' => 'required|integer|exists:tasks_statuses,id',
         ];
     }
 }

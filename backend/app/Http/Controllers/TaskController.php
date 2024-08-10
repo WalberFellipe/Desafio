@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Services\TaskService;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -25,7 +25,12 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
+        \Log::info('Store method called with data: ', $request->all());
+
         $task = $this->taskService->createTask($request->validated());
+
+        \Log::info('Task created: ', $task->toArray());
+        
         return response()->json($task, 201);
     }
 

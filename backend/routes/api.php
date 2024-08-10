@@ -26,6 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/tasks/test', function () {
+        return response()->json(['message' => 'Tasks route is working']);
+    });
 
     // Task routes
     Route::prefix('tasks')->group(function () {

@@ -17,21 +17,21 @@ class TasksStatusesTableSeeder extends Seeder
     {
         DB::table('tasks_statuses')->insert([
             [
-                'id' => Str::uuid(),
+                'id' => 1,
                 'key' => 'TO_DO',
                 'description' => 'Pendente',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id' => Str::uuid(),
+                'id' => 2,
                 'key' => 'IN_PROGRESS',
                 'description' => 'Em Andamento',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id' => Str::uuid(),
+                'id' => 3,
                 'key' => 'DONE',
                 'description' => 'Concluída',
                 'created_at' => now(),

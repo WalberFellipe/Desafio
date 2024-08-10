@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tasks_statuses', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('key')->unique();
             $table->string('description');
             $table->timestamps();
