@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +14,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'id' => Str::uuid(),
-            'email' => 'user@email.com',
-            'password' => Hash::make('123456'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'is_active' => true,
-        ]);
+        if (!DB::table('users')->where('email', 'user@email.com')->exists()) {
+            DB::table('users')->insert([
+                'id' => Str::uuid(),
+                'email' => 'user@email.com',
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'is_active' => true,
+            ]);
+        }
     }
 }

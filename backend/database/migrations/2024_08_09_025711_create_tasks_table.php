@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->uuid('status');
+            $table->unsignedBigInteger('status'); 
             $table->foreign('status')->references('id')->on('tasks_statuses');
         });
     }

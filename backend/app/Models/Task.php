@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Task extends Model
 {
     use HasFactory;
+
     protected $table = 'tasks';
     protected $keyType = 'string';
     public $incrementing = false;
@@ -18,8 +20,17 @@ class Task extends Model
         'status',
     ];
 
-    const CREATED_AT = 'createdat';
-    const UPDATED_AT = 'updatedat';
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($task) {
+            if (empty($task->id)) {
+                $task->id = (string) Str::uuid();
+            }
+        });
+    }
+
 
     public function status()
     {
