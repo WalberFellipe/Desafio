@@ -1,5 +1,5 @@
 # Documentação
-Node, Docker, Docker-compose, Composer, php
+Projeto é um teste prático feito para a etapa final do processo seletivo.
 
 # Pré-requisitos
 
@@ -34,7 +34,7 @@ cd backend
 composer install --optimize-autoloader --no-dev
 ```
 
-O .env não há necessidade de ser gerado, já está presente no repo.
+O .env não há necessidade de ser configurado manualmente pois já está presente no repositório.
 
 ## 3. Iniciar containers
 Após a instalação basta iniciar os containers com:
@@ -45,9 +45,9 @@ docker-compose up -d
 Ele iniciará os seguintes processos
 
 - Backend: Laravel PHP-FPM service na porta 9000
-- Frontend: SvelteKit development server na pora 3000
+- Frontend: SvelteKit development server na porta 3000
 - Postgres: PostgreSQL database na porta 5432
-- pgAdmin: Database administration tool na pora 8081
+- pgAdmin: Database administration tool na porta 8081
 - nginx: Web server na porta 80
 
 ## 4. Acessando a aplicação
@@ -92,7 +92,9 @@ INSERT INTO TasksStatus (Id, Key, Description) VALUES
 ```
 
 Mas não é necessário rodar este script novamente, basta rodar o comando abaixo:
-`docker exec -it backend php artisan migrate --seed`
+```sh
+docker exec -it backend php artisan migrate --seed
+```
 Com isso ele irá gerar as tabelas automaticamente e também irá gerar o usuário com o seguinte e-mail e senha para acesso aos ambientes:
 ```
 e-mail: user@email.com
@@ -102,7 +104,7 @@ password: 123456
 
 ## Solução de Problemas
 
-- Conflito de portas: Garanta que não outro serviço usando as portas `80`, `3000`, `5432`, ou `9000`.
+- Conflito de portas: Garanta que não existe outro serviço usando as portas `80`, `3000`, `5432`, ou `9000`.
   
 - Logs: Cheque os logs individuais de cada serviço:
   
