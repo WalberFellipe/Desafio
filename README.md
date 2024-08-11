@@ -99,7 +99,14 @@ Com isso ele irá gerar as tabelas automaticamente e também irá gerar o usuár
 ```
 e-mail: user@email.com
 password: 123456
+```
 
+## 6.Mobile
+
+O App roda fora do container então é necessário acessar a sua pasta e executá-lo individualmente
+```
+cd mobile
+npm run dev
 ```
 
 ## Solução de Problemas
