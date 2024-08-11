@@ -1,59 +1,115 @@
 <script>
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import Counter from './Counter.svelte';
+    import axios from 'axios';
+    import { goto } from '$app/navigation';
+
+    let email = '', password = ''; 
+
+    let submit = async () => {
+        if (email == '' || password == '') {
+            return;
+        }
+
+        console.log("hello");
+
+        const response = await axios.post('/login', {
+            email,
+            password
+        }, {withCredentials: true});
+
+        if (response.status == 200) {
+            localStorage.setItem('token', response.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            goto('/tasks');
+        }
+    }
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />
-	</h1>
-
-	<h3>
-	 	<strong>src/routes/+page.svelte</strong>
-	</h3>
-
-	<Counter />
-</section>
+<div id="login-page-container">
+    <div id="login-box">
+        <div id="logo-container">
+            <img src="/src/assets/images/Logo-Diagonal.png" alt="Logo" />
+        </div>
+        <div id="form-container">
+            <p>Email</p>
+            <input type="text" bind:value={email} />
+            <p>Senha</p>
+            <input type="password" bind:value={password} />
+            <button on:click={submit}>Entrar</button>
+        </div>
+    </div>
+</div>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+    #login-page-container {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        background: url('/src/assets/images/Background-Diagonal.png') no-repeat center center fixed;
+        background-size: cover;
+    }
 
-	h1 {
-		width: 100%;
-	}
+    #login-box {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        padding: 20px;
+        border-radius: 22px;
+        background-color: #FDE8CD;
+        text-align: center;
+    }
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
+    #logo-container img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
+    #form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #form-container p {
+        color: black;
+        margin: 0;
+    }
+
+    #form-container input {
+        width: 100%;
+        height: 30px;
+        border-radius: 7px;
+        padding: 5px;
+        border: 1px solid #ddd;
+    }
+
+    #form-container button {
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        background-color: #00695c;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #form-container button:hover {
+        background-color: #004d40;
+    }
+
+    #register-link {
+        margin-top: 20px;
+    }
+
+    #register-link a {
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+    #register-link a:hover {
+        text-decoration: underline;
+    }
 </style>
