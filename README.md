@@ -109,6 +109,16 @@ cd mobile
 npm run dev
 ```
 
+Outro ponto de atenção é: Pode ser que exista problema pra comunicar com a API pelo APP, pra isso recomendo acessar o gateway do mesmo e colocar na api
+
+![image](https://github.com/user-attachments/assets/d0e34c8b-2898-44ea-91bf-069cf8cc61b5)
+
+
+Local onde deverá ser substituido pelo seu IP
+`mobile\src\services\api.ts`
+Linha 14:  `const url = "http://10.0.2.2/api";`
+
+
 ## Solução de Problemas
 
 - Conflito de portas: Garanta que não existe outro serviço usando as portas `80`, `3000`, `5432`, ou `9000`.
@@ -121,3 +131,25 @@ docker logs backend
 docker logs nginx
 docker logs postgres
 ```
+
+## Horas totais gastas
+```
+Configurar todo o Ambiente com Docker - 3 Horas
+Criação de schemas direto no pgAdmin - 30 minutos
+Criação da camada de autenticação no back-end - 2 horas
+Criação do MVC das tarefas + seeders - 4 horas
+Criar App Mobile - 3 horas
+Criar App Web - 4 Horas
+```
+Tempo total gasto: 16 Horas e 30 Minutos
+
+## Tecnologias e Conceitos Usados
+
+Laravel, Breeze, SOLID, PostgreSQL, pgAdmin, Docker, React Native, React Hooks, React Custom Hooks,
+Axios(Mobile e Web), Expo, Android Studio, React Hook Form, Svelte, SvelteKit, Prettier.
+
+## Board do projeto
+
+https://github.com/users/WalberFellipe/projects/2
+
+Se precisar de mais detalhes ou ajustes, estou à disposição! 
