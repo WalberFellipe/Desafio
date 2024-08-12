@@ -17,9 +17,6 @@ class TaskController extends Controller
         $this->taskService = $taskService;
     }
 
-    /**
-     * Display a paginated list of tasks.
-     */
     public function index(Request $request)
     {
         $page = $request->input('page', 1);
