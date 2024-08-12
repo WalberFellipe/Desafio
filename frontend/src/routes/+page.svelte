@@ -1,6 +1,6 @@
 <script>
-    import axios from 'axios';
     import { goto } from '$app/navigation';
+    import axios from 'axios';
 
     let email = '', password = ''; 
 
@@ -8,9 +8,6 @@
         if (email == '' || password == '') {
             return;
         }
-
-        console.log("hello");
-
         const response = await axios.post('/login', {
             email,
             password
