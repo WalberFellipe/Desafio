@@ -122,7 +122,6 @@ Linha 14:  `const url = "http://10.0.2.2/api";`
 ## Solução de Problemas
 
 - Conflito de portas: Garanta que não existe outro serviço usando as portas `80`, `3000`, `5432`, ou `9000`.
-  
 - Logs: Cheque os logs individuais de cada serviço:
   
 ```sh
@@ -151,5 +150,8 @@ Axios(Mobile e Web), Expo, Android Studio, React Hook Form, Svelte, SvelteKit, P
 ## Board do projeto
 
 https://github.com/users/WalberFellipe/projects/2
+
+## Problemas conhecidos
+Pode haver problema de estilização e quebras de tela por conta de este projeto não ter uma responsividade. Sendo assim, em diferentes dispositivos ele pode se apresentar de diferentes formas.
 
 Se precisar de mais detalhes ou ajustes, estou à disposição! 
