@@ -34,7 +34,7 @@ class Task extends Model
 
     public function status()
     {
-        return $this->belongsTo(TasksStatus::class, 'status');
+        return $this->belongsTo(TasksStatus::class, 'status', 'id');
     }
 
     public function user()

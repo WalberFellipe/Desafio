@@ -1,7 +1,7 @@
 <script>
   import axios from 'axios';
-  import Pagination from '../../components/Pagination.svelte';
   import Modal from '../../components/Modal.svelte';
+  import Pagination from '../../components/Pagination.svelte';
 
   let tasks = [];
   let currentPage = 1;
@@ -10,10 +10,12 @@
   let totalPages = 1;
   let showModal = false;
   let selectedTask = { id:'', name: '', description: '', status: { key: 'TO_DO' } };
+  let sortBy = 'name';
+  let sortOrder = 'asc';
 
   async function fetchTasks(page = 1) {
     try {
-      const response = await axios.get(`/tasks?page=${page}`, {
+      const response = await axios.get(`/tasks?page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -29,6 +31,16 @@
 
   function handlePageChange(page) {
     fetchTasks(page);
+  }
+
+  function handleSort(column) {
+    if (sortBy === column) {
+      sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortBy = column;
+      sortOrder = 'asc';
+    }
+    fetchTasks(currentPage);
   }
 
   function getStatusColor(statusKey) {
@@ -91,9 +103,15 @@
 <table>
   <thead>
     <tr>
-      <th>Nome da tarefa</th>
-      <th>Data</th>
-      <th>Situação</th>
+      <th on:click={() => handleSort('name')}>
+        Nome da tarefa {sortBy === 'name' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+      </th>
+      <th on:click={() => handleSort('created_at')}>
+        Data {sortBy === 'created_at' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+      </th>
+      <th on:click={() => handleSort('status')}>
+        Situação {sortBy === 'status' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+      </th>
       <th>Ações</th>
     </tr>
   </thead>
