@@ -17,9 +17,31 @@ class TaskController extends Controller
         $this->taskService = $taskService;
     }
 
-    public function index()
+    /**
+     * Display a paginated list of tasks.
+     */
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $page = $request->input('page', 1);
+        $perPage = 5;
+        $sortBy = $request->input('sort_by', 'name');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        $sortableColumns = ['name', 'created_at', 'status'];
+        if (!in_array($sortBy, $sortableColumns)) {
+            $sortBy = 'name';
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc';
+        }
+
+        $tasks = Task::with('status')
+            ->join('tasks_statuses', 'tasks.status', '=', 'tasks_statuses.id')
+            ->orderBy($sortBy === 'status' ? 'tasks_statuses.description' : $sortBy, $sortOrder)
+            ->select('tasks.*')
+            ->paginate($perPage, ['*'], 'page', $page);
+
         return response()->json($tasks);
     }
 
