@@ -6,9 +6,6 @@ import { Routes } from './src/routes/';
 import theme from './src/theme';
 
 function App(): JSX.Element {
-
-  console.log("Rendering App component");
-
   
   return (
     <SafeAreaProvider style={{ backgroundColor: theme.COLORS.WHITE }}>

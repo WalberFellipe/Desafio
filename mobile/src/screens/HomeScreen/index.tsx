@@ -18,7 +18,6 @@ const Tarefas = () => {
   if (error) return <div>{error}</div>;
 
   const handleTaskPress = (task: TaskDTO) => {
-    console.log("Task pressed:", task);
     setSelectedTask(task);
   };
 

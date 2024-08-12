@@ -59,15 +59,9 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, []);
 
   const signIn = async (credentials: SignInDTO): Promise<string> => {
-    console.log("Entrou no sign-in", credentials);
-  
     try {
-      console.log("Entrou no try do sign-in");
       const response = await signInService(credentials);
-      console.log("Response from signInService:", response);
-  
       if (response.data && response.data.token) {
-        console.log("Response data:", response.data);
         setIsLoading(true);
         await storeString(StorageKeys.token, response.data.token);
         
@@ -80,7 +74,6 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
       }
     } catch (error) {
       const errorMessage = apiErrorHandler(error);
-      console.log("Entrou no error", errorMessage);
       console.error("Error details:", error);
       return errorMessage;
     } finally {
